@@ -6,5 +6,5 @@ import lombok.Builder;
 public class Mensaje {
 
     private Boolean error;
-    private String mensaje;
+    private String respuesta;
 }
