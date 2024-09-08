@@ -1,9 +1,6 @@
 package com.example.pets.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,6 +17,8 @@ import java.time.LocalDateTime;
 public class MascotasEntity {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "mascotas_seq")
+    @SequenceGenerator(name = "mascotas_seq", sequenceName = "mascotas_seq", allocationSize = 1)
     @Column(name = "id")
     private Integer id;
 
