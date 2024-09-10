@@ -3,7 +3,9 @@ package com.example.pets.contoller;
 import com.example.pets.dto.ClientePersistencia;
 import com.example.pets.dto.Mensaje;
 import com.example.pets.service.IClientesService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,8 +19,8 @@ public class ClientesController {
 
     private final IClientesService clientesService;
 
-    @PostMapping("/registrar")
-    public ResponseEntity<Mensaje> crearCliente(@RequestBody ClientePersistencia cliente) {
+    @PostMapping(value = "/registrar")
+    public ResponseEntity<Mensaje> crearCliente(@RequestBody @Valid ClientePersistencia cliente) {
         clientesService.crearCliente(cliente);
         return ResponseEntity.ok(Mensaje.builder().error(false).respuesta("Cliente creado").build());
     }

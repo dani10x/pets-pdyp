@@ -16,6 +16,9 @@ public class ClienteService implements IClientesService {
 
     @Override
     public void crearCliente(ClientePersistencia cliente) throws DataException {
+        if(clientesRepository.existsByCedula(cliente.getCedula())) {
+            throw new DataException("El cliente con cedula {0} ya existe", cliente.getCedula());
+        }
         ClientesEntity entity = new ClientesEntity();
         entity.setNombres(cliente.getNombres());
         entity.setApellidos(cliente.getApellidos());
@@ -24,4 +27,6 @@ public class ClienteService implements IClientesService {
         entity.setTelefono(cliente.getTelefonos());
         clientesRepository.save(entity);
     }
+
+
 }
