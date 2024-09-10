@@ -21,5 +21,5 @@ public class ClientePersistencia {
     @NotBlank
     private String direccion;
     @NotBlank
-    private String telefonos;
+    private String telefono;
 }

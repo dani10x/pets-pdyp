@@ -1,5 +1,6 @@
 package com.example.pets.service.impl;
 
+import com.example.pets.mapper.MascotaMapper;
 import org.springframework.stereotype.Service;
 
 import com.example.pets.dto.MascotaPersistencia;
@@ -18,11 +19,7 @@ public class MascotaService implements IMascotaService {
 
     @Override
     public void CrearMascotas(MascotaPersistencia mascota) throws DataException{
-        MascotasEntity entity=new MascotasEntity();
-        entity.setNombre(mascota.getNombre());
-        entity.setRaza(mascota.getRaza());
-        entity.setPeso(mascota.getPeso());
-        entity.setFechaNacimiento(mascota.getFechaNacimiento());
+        MascotasEntity entity= MascotaMapper.INSTANCE.dtoToEntity(mascota);
         mascotaRepository.save(entity);
     }
 }
