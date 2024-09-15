@@ -48,7 +48,7 @@ public class ClienteService implements IClientesService {
     @Override
     public void actualizarCliente(ClienteUpdate cliente) throws DataException {
         if(!clientesRepository.existsById(cliente.getId())) {
-            throw new DataException("El cliente que se intentó actualziar no existe");
+            throw new DataException("El cliente que se intentó actualizar no existe");
         }
         clientesRepository.save(ClienteMapper.INSTANCE.dtoUpdateToEntity(cliente));
     }
