@@ -33,4 +33,11 @@ public class MascotasEntity {
 
     @Column(name = "fechanacimiento")
     private LocalDateTime fechaNacimiento;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="idcliente", insertable = false, updatable = false)
+    private ClientesEntity ClienteEntity;
+
+    @Column(name = "idcliente")
+    private Integer idCliente;
 }
