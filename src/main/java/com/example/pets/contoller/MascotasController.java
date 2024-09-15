@@ -1,12 +1,20 @@
 package com.example.pets.contoller;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.pets.dto.MascotaConsulta;
 import com.example.pets.dto.MascotaPersistencia;
+import com.example.pets.dto.MascotaUpdate;
 import com.example.pets.dto.Mensaje;
 import com.example.pets.service.IMascotaService;
 
@@ -24,5 +32,23 @@ public class MascotasController {
         mascotaService.CrearMascotas(mascota);
         return ResponseEntity.ok(Mensaje.builder().error(false).respuesta("Mascota creada").build());
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Mensaje> EliminarMascota(@PathVariable Integer id){
+        mascotaService.EliminarMascota(id);
+        return ResponseEntity.ok(Mensaje.builder().error(false).respuesta("Mascota eliminada").build());
+    }
+
+    @GetMapping("/listar")
+    public ResponseEntity<List<MascotaConsulta>> consutlarMascostas(){
+        return ResponseEntity.ok(mascotaService.ListarMascotas());
+    }
+
+    @PutMapping("/actualizar")
+    public ResponseEntity<Mensaje> ActualizarMascota(@RequestBody MascotaUpdate mascota){
+        mascotaService.ActualizarMascota(mascota);
+        return ResponseEntity.ok(Mensaje.builder().error(false).respuesta("Mascota actualizada").build());
+    }
+
     
 }

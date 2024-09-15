@@ -9,7 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClienteConsulta extends ClientePersistencia {
-
-    private Integer id;
+public class MedicamentoConsulta extends MedicamentoPersistencia{
+    private Integer Id;
 }
