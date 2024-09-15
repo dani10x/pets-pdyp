@@ -10,7 +10,6 @@ import com.example.pets.dto.MedicamentoPersistencia;
 import com.example.pets.dto.MedicamentoUpdate;
 import com.example.pets.entity.MedicamentosEntity;
 import com.example.pets.exception.DataException;
-import com.example.pets.mapper.ClienteMapper;
 import com.example.pets.mapper.MedicamentoMapper;
 import com.example.pets.repository.MedicamentosRepository;
 import com.example.pets.service.IMedicamentosService;
@@ -28,11 +27,11 @@ public class MedicamentoService implements IMedicamentosService {
     }
 
     @Override
-    public void EliminarMedicamento(Integer id) {
+    public void EliminarMedicamento(Integer id) throws DataException{
         if (medicamentoRepository.existsById(id)) {
             medicamentoRepository.deleteById(id);
         } else {
-            throw new DataException("El medicamento no exite ");
+            throw new DataException("El medicamento que intento eliminar no exite ");
         }
     }
 
