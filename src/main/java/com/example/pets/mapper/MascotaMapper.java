@@ -18,5 +18,5 @@ public interface MascotaMapper {
 
     List<MascotaConsulta> listEntityToListDto(List<MascotasEntity> entities);
 
-    MascotasEntity dtoUpdateToEntity(MascotaUpdate mascotaPersistencia);
+    MascotasEntity dtoUpdateToEntity(MascotaUpdate mascota);
 }
