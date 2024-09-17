@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class MedicamentosController {
     private final IMedicamentosService medicamentosService;
 
-    @PostMapping(value = "/registrar")
+    @PostMapping("/registrar")
     public ResponseEntity<Mensaje> CrearMedicamento(@RequestBody @Valid MedicamentoPersistencia medicamento){
         medicamentosService.CrearMedicamento(medicamento);
         return ResponseEntity.ok(Mensaje.builder().error(false).respuesta("Medicamento creado").build());
