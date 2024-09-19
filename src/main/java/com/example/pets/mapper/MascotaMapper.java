@@ -9,7 +9,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Mapper()
 public interface MascotaMapper {
 
     MascotaMapper INSTANCE = Mappers.getMapper(MascotaMapper.class);
@@ -19,4 +19,6 @@ public interface MascotaMapper {
     List<MascotaConsulta> listEntityToListDto(List<MascotasEntity> entities);
 
     MascotasEntity dtoUpdateToEntity(MascotaUpdate mascotaPersistencia);
+
+    MascotaConsulta entityToEntityDto(MascotasEntity entity);
 }

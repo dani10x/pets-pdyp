@@ -1,9 +1,6 @@
 package com.example.pets.contoller;
 
-import com.example.pets.dto.ClienteConsulta;
-import com.example.pets.dto.ClientePersistencia;
-import com.example.pets.dto.ClienteUpdate;
-import com.example.pets.dto.Mensaje;
+import com.example.pets.dto.*;
 import com.example.pets.service.IClientesService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -40,5 +37,10 @@ public class ClientesController {
     public ResponseEntity<Mensaje> actualizarCliente(@RequestBody @Valid ClienteUpdate cliente) {
         clientesService.actualizarCliente(cliente);
         return ResponseEntity.ok(Mensaje.builder().error(false).respuesta("Cliente actualizado").build());
+    }
+
+    @GetMapping("/autocompletable")
+    public ResponseEntity<List<ClienteAutocompletable>> consultarClientesAutocompletanle() {
+        return ResponseEntity.ok(clientesService.consultarClientesAutocomplete());
     }
 }

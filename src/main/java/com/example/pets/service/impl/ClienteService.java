@@ -1,5 +1,6 @@
 package com.example.pets.service.impl;
 
+import com.example.pets.dto.ClienteAutocompletable;
 import com.example.pets.dto.ClienteConsulta;
 import com.example.pets.dto.ClientePersistencia;
 import com.example.pets.dto.ClienteUpdate;
@@ -51,5 +52,10 @@ public class ClienteService implements IClientesService {
             throw new DataException("El cliente que se intentó actualizar no existe");
         }
         clientesRepository.save(ClienteMapper.INSTANCE.dtoUpdateToEntity(cliente));
+    }
+
+    @Override
+    public List<ClienteAutocompletable> consultarClientesAutocomplete() throws DataException {
+        return clientesRepository.findAutocompletable();
     }
 }

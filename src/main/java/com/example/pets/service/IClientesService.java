@@ -1,5 +1,6 @@
 package com.example.pets.service;
 
+import com.example.pets.dto.ClienteAutocompletable;
 import com.example.pets.dto.ClienteConsulta;
 import com.example.pets.dto.ClientePersistencia;
 import com.example.pets.dto.ClienteUpdate;
@@ -16,5 +17,7 @@ public interface IClientesService {
     List<ClienteConsulta> listarClientes() throws DataException;
 
     void actualizarCliente(ClienteUpdate cliente) throws DataException;
+
+    List<ClienteAutocompletable> consultarClientesAutocomplete() throws DataException;
 
 }
