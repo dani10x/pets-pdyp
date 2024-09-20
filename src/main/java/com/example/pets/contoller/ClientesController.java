@@ -43,4 +43,9 @@ public class ClientesController {
     public ResponseEntity<List<ClienteAutocompletable>> consultarClientesAutocompletanle() {
         return ResponseEntity.ok(clientesService.consultarClientesAutocomplete());
     }
+
+    @GetMapping("/reporte/{idCliente}")
+    public ResponseEntity<ReporteClientesDTO> generarReporteCliente(@PathVariable Integer idCliente) {
+        return ResponseEntity.ok(clientesService.consultarReporteCliente(idCliente));
+    }
 }

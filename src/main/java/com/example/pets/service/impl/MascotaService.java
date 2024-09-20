@@ -1,14 +1,13 @@
 package com.example.pets.service.impl;
 
 
-import com.example.pets.dto.MascotasConsltaDTO;
+import com.example.pets.dto.*;
 import com.example.pets.mapper.MascotaMapper;
 import java.util.List;
 import java.util.Optional;
+
+import com.example.pets.service.ITratamientoService;
 import org.springframework.stereotype.Service;
-import com.example.pets.dto.MascotaConsulta;
-import com.example.pets.dto.MascotaPersistencia;
-import com.example.pets.dto.MascotaUpdate;
 import com.example.pets.entity.MascotasEntity;
 import com.example.pets.exception.DataException;
 import com.example.pets.repository.MascotasRepository;
@@ -21,6 +20,7 @@ import lombok.RequiredArgsConstructor;
 public class MascotaService implements IMascotaService {
 
     private final MascotasRepository mascotaRepository;
+    private final ITratamientoService tratamientoService;
 
     @Override
     public void CrearMascotas(MascotaPersistencia mascota) throws DataException{
@@ -60,5 +60,18 @@ public class MascotaService implements IMascotaService {
                 .filter(c -> !c.isEmpty())
                 .map(MascotaMapper.INSTANCE::listEntityToDtoConsulta)
                 .orElseThrow(() -> new DataException("No existe ninguna mascota registrada"));
+    }
+
+    @Override
+    public List<ReporteMascotasDTO> consultarMascotas(Integer idCliente) {
+        return mascotaRepository.findByClienteEntity_Id(idCliente).stream()
+                .map(this::generarReporteMascota)
+                .toList();
+    }
+
+    private ReporteMascotasDTO generarReporteMascota(MascotasEntity entity) {
+        ReporteMascotasDTO reporte = MascotaMapper.INSTANCE.entityToReporteDTO(entity);
+        reporte.setTratamientos(tratamientoService.reporteTratamientos(entity.getId()));
+        return reporte;
     }
 }

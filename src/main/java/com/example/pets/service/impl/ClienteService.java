@@ -1,14 +1,12 @@
 package com.example.pets.service.impl;
 
-import com.example.pets.dto.ClienteAutocompletable;
-import com.example.pets.dto.ClienteConsulta;
-import com.example.pets.dto.ClientePersistencia;
-import com.example.pets.dto.ClienteUpdate;
+import com.example.pets.dto.*;
 import com.example.pets.entity.ClientesEntity;
 import com.example.pets.exception.DataException;
 import com.example.pets.mapper.ClienteMapper;
 import com.example.pets.repository.ClientesRepository;
 import com.example.pets.service.IClientesService;
+import com.example.pets.service.IMascotaService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +18,7 @@ import java.util.Optional;
 public class ClienteService implements IClientesService {
 
     private final ClientesRepository clientesRepository;
+    private final IMascotaService mascotaService;
 
     @Override
     public void crearCliente(ClientePersistencia cliente) throws DataException {
@@ -57,5 +56,13 @@ public class ClienteService implements IClientesService {
     @Override
     public List<ClienteAutocompletable> consultarClientesAutocomplete() throws DataException {
         return clientesRepository.findAutocompletable();
+    }
+
+    @Override
+    public ReporteClientesDTO consultarReporteCliente(Integer idCliente) throws DataException {
+        ClientesEntity cliente = clientesRepository.findById(idCliente).orElseThrow(() -> new DataException("El cliente no existe"));
+        ReporteClientesDTO reporte = ClienteMapper.INSTANCE.entityToReporteDTO(cliente);
+        reporte.setMascotas(mascotaService.consultarMascotas(idCliente));
+        return reporte;
     }
 }

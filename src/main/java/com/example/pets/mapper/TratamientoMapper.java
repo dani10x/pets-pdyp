@@ -1,14 +1,11 @@
 package com.example.pets.mapper;
 import java.util.List;
 
-import com.example.pets.dto.TratamientoMascotaConsulta;
+import com.example.pets.dto.*;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
 
-import com.example.pets.dto.TratamientoConsulta;
-import com.example.pets.dto.TratamientoPersistencia;
-import com.example.pets.dto.TratamientoUpdate;
 import com.example.pets.entity.TratamientosEntity;
 
 import org.mapstruct.ReportingPolicy;
@@ -34,5 +31,15 @@ public interface TratamientoMapper {
     TratamientoMascotaConsulta entityToDtoTratamiento(TratamientosEntity entity);
 
     List<TratamientoMascotaConsulta> listEntityToListDtoTratamiento(List<TratamientosEntity> entities);
+
+    @Mapping(source = "medicamentosEntity.descripcion", target = "descripcion")
+    @Mapping(source = "medicamentosEntity.nombre", target = "nombre")
+    @Mapping(source = "medicamentosEntity.dosis", target = "dosis")
+    ReporteTratamientosDTO entityToReporteDTO(TratamientosEntity entity);
+
+    @Mapping(source = "medicamentosEntity.descripcion", target = "descripcion")
+    @Mapping(source = "medicamentosEntity.nombre", target = "nombre")
+    @Mapping(source = "medicamentosEntity.dosis", target = "dosis")
+    List<ReporteTratamientosDTO> ListEntityToListReporteDTO(List<TratamientosEntity> entities);
 
 }

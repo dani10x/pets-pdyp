@@ -4,12 +4,9 @@ import java.util.List;
 
 import java.util.Optional;
 
-import com.example.pets.dto.TratamientoMascotaConsulta;
+import com.example.pets.dto.*;
 import org.springframework.stereotype.Service;
 
-import com.example.pets.dto.TratamientoConsulta;
-import com.example.pets.dto.TratamientoPersistencia;
-import com.example.pets.dto.TratamientoUpdate;
 import com.example.pets.entity.TratamientosEntity;
 import com.example.pets.exception.DataException;
 import com.example.pets.mapper.TratamientoMapper;
@@ -63,6 +60,13 @@ public class TratamientoService implements ITratamientoService{
         return Optional.of(tratamientoRepository.findByMascotasEntity_Id(id))
                 .filter(c -> !c.isEmpty())
                 .map(TratamientoMapper.INSTANCE::listEntityToListDtoTratamiento).orElse(List.of());
+    }
+
+    @Override
+    public List<ReporteTratamientosDTO> reporteTratamientos(Integer id) {
+        return Optional.of(tratamientoRepository.findByMascotasEntity_Id(id))
+                .filter(c -> !c.isEmpty())
+                .map(TratamientoMapper.INSTANCE::ListEntityToListReporteDTO).orElse(List.of());
     }
 
 }

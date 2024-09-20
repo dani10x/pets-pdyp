@@ -1,9 +1,6 @@
 package com.example.pets.mapper;
 
-import com.example.pets.dto.MascotaConsulta;
-import com.example.pets.dto.MascotaPersistencia;
-import com.example.pets.dto.MascotaUpdate;
-import com.example.pets.dto.MascotasConsltaDTO;
+import com.example.pets.dto.*;
 import com.example.pets.entity.MascotasEntity;
 import java.util.List;
 import org.mapstruct.Mapper;
@@ -28,4 +25,6 @@ public interface MascotaMapper {
     MascotasConsltaDTO entityToDtoConsulta(MascotasEntity entity);
 
     List<MascotasConsltaDTO> listEntityToDtoConsulta(List<MascotasEntity> entities);
+
+    ReporteMascotasDTO entityToReporteDTO(MascotasEntity entity);
 }

@@ -1,10 +1,8 @@
 package com.example.pets.service;
 
 import java.util.List;
-import com.example.pets.dto.TratamientoConsulta;
-import com.example.pets.dto.TratamientoMascotaConsulta;
-import com.example.pets.dto.TratamientoPersistencia;
-import com.example.pets.dto.TratamientoUpdate;
+
+import com.example.pets.dto.*;
 import com.example.pets.exception.DataException;
 
 public interface ITratamientoService {
@@ -18,5 +16,7 @@ public interface ITratamientoService {
     void ActualizarTratamiento(TratamientoUpdate tratamiento) throws DataException;
 
     List<TratamientoMascotaConsulta> ListarTratamientos(Integer id) throws DataException;
+
+    List<ReporteTratamientosDTO> reporteTratamientos(Integer id);
 }
     
