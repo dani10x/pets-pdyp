@@ -1,5 +1,7 @@
 package com.example.pets.mapper;
 import java.util.List;
+
+import com.example.pets.dto.TratamientoMascotaConsulta;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -26,5 +28,11 @@ public interface TratamientoMapper {
     List<TratamientoConsulta> listEntityToListDto(List<TratamientosEntity> entities);
 
     TratamientosEntity dtoUpdateToEntity(TratamientoUpdate tratamiento);
+
+    @Mapping(source = "medicamentosEntity.nombre", target = "nombreMedicamento")
+    @Mapping(source = "medicamentosEntity.dosis", target = "dosis")
+    TratamientoMascotaConsulta entityToDtoTratamiento(TratamientosEntity entity);
+
+    List<TratamientoMascotaConsulta> listEntityToListDtoTratamiento(List<TratamientosEntity> entities);
 
 }

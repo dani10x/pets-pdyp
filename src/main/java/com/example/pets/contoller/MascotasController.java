@@ -2,6 +2,7 @@ package com.example.pets.contoller;
 
 import java.util.List;
 
+import com.example.pets.dto.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.pets.dto.MascotaConsulta;
-import com.example.pets.dto.MascotaPersistencia;
-import com.example.pets.dto.MascotaUpdate;
-import com.example.pets.dto.Mensaje;
 import com.example.pets.service.IMascotaService;
 
 import lombok.RequiredArgsConstructor;
@@ -48,6 +45,11 @@ public class MascotasController {
     public ResponseEntity<Mensaje> ActualizarMascota(@RequestBody MascotaUpdate mascota){
         mascotaService.ActualizarMascota(mascota);
         return ResponseEntity.ok(Mensaje.builder().error(false).respuesta("Mascota actualizada").build());
+    }
+
+    @GetMapping("/listar-mascotas")
+    public ResponseEntity<List<MascotasConsltaDTO>> listarMascotas() {
+        return ResponseEntity.ok(mascotaService.listarMascotas());
     }
 
     

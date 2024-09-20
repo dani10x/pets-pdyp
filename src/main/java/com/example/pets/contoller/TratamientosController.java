@@ -1,5 +1,7 @@
 package com.example.pets.contoller;
 import java.util.List;
+
+import com.example.pets.dto.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,10 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.pets.dto.Mensaje;
-import com.example.pets.dto.TratamientoConsulta;
-import com.example.pets.dto.TratamientoPersistencia;
-import com.example.pets.dto.TratamientoUpdate;
 import com.example.pets.service.ITratamientoService;
 import lombok.RequiredArgsConstructor;
 
@@ -44,5 +42,10 @@ public class TratamientosController {
     public ResponseEntity<Mensaje> ActualizarTratamiento(@RequestBody TratamientoUpdate tratamiento){
         tratamientoService.ActualizarTratamiento(tratamiento);
         return ResponseEntity.ok(Mensaje.builder().error(false).respuesta("Tratamiento actualizada").build());
+    }
+
+    @GetMapping("/lstar-tratamientos/{id}")
+    public ResponseEntity<List<TratamientoMascotaConsulta>> consultarTratamientosMascota(@PathVariable Integer id) {
+        return ResponseEntity.ok(tratamientoService.ListarTratamientos(id));
     }
 }

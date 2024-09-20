@@ -4,6 +4,7 @@ import java.util.List;
 
 import java.util.Optional;
 
+import com.example.pets.dto.TratamientoMascotaConsulta;
 import org.springframework.stereotype.Service;
 
 import com.example.pets.dto.TratamientoConsulta;
@@ -55,6 +56,13 @@ public class TratamientoService implements ITratamientoService{
         }else{
             throw new DataException("el tratamiento que intento actualizar no existe");
         }
+    }
+
+    @Override
+    public List<TratamientoMascotaConsulta> ListarTratamientos(Integer id) throws DataException {
+        return Optional.of(tratamientoRepository.findByMascotasEntity_Id(id))
+                .filter(c -> !c.isEmpty())
+                .map(TratamientoMapper.INSTANCE::listEntityToListDtoTratamiento).orElse(List.of());
     }
 
 }

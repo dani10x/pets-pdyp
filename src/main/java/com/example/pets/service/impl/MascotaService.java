@@ -1,6 +1,7 @@
 package com.example.pets.service.impl;
 
 
+import com.example.pets.dto.MascotasConsltaDTO;
 import com.example.pets.mapper.MascotaMapper;
 import java.util.List;
 import java.util.Optional;
@@ -51,5 +52,13 @@ public class MascotaService implements IMascotaService {
         }else{
             throw new DataException("La mascota que intento actualizar no existe");
         }
+    }
+
+    @Override
+    public List<MascotasConsltaDTO> listarMascotas() throws DataException {
+        return Optional.of(mascotaRepository.findAll())
+                .filter(c -> !c.isEmpty())
+                .map(MascotaMapper.INSTANCE::listEntityToDtoConsulta)
+                .orElseThrow(() -> new DataException("No existe ninguna mascota registrada"));
     }
 }
