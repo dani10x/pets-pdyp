@@ -1,0 +1,4 @@
+type Mensaje {
+    error: Boolean!
+    respuesta: String!
+}

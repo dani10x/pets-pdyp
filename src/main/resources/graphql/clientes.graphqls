@@ -1,0 +1,26 @@
+type Cliente {
+    id: ID!
+    cedula: String!
+    nombres: String!
+    apellidos: String!
+    direccion: String!
+    telefono: String!
+}
+
+type Query {
+    getAllClientes: [Cliente]
+}
+
+type Mutation {
+    createCliente(input: ClientePersistencia!): Mensaje
+    deleteCliente(id: ID!): Mensaje
+    updateCliente(id: ID!, input: ClientePersistencia!): Mensaje
+}
+
+input ClientePersistencia {
+    cedula: String!
+    nombres: String!
+    apellidos: String!
+    direccion: String!
+    telefono: String!
+}

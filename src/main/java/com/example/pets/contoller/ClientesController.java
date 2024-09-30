@@ -4,6 +4,9 @@ import com.example.pets.dto.*;
 import com.example.pets.service.IClientesService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -47,5 +50,30 @@ public class ClientesController {
     @GetMapping("/reporte/{idCliente}")
     public ResponseEntity<ReporteClientesDTO> generarReporteCliente(@PathVariable Integer idCliente) {
         return ResponseEntity.ok(clientesService.consultarReporteCliente(idCliente));
+    }
+
+    @QueryMapping
+    public List<ClienteConsulta> getAllClientes() {
+        return clientesService.listarClientes();
+    }
+
+    @MutationMapping
+    public Mensaje createCliente(@Argument ClientePersistencia input) {
+        clientesService.crearCliente(input);
+        return Mensaje.builder().error(false).respuesta("Cliente creado").build();
+    }
+
+    @MutationMapping
+    public Mensaje updateCliente(@Argument Integer id, @Argument ClientePersistencia input) {
+        ClienteUpdate cliente = new ClienteUpdate(id, input.getCedula(), input.getNombres(),
+                input.getApellidos(), input.getDireccion(), input.getTelefono());
+        clientesService.actualizarCliente(cliente);
+        return Mensaje.builder().error(false).respuesta("Cliente actualizado").build();
+    }
+
+    @MutationMapping
+    public Mensaje deleteCliente(@Argument Integer id) {
+        clientesService.eliminarCliente(id);
+        return Mensaje.builder().error(false).respuesta("Cliente eliminado").build();
     }
 }
