@@ -1,0 +1,12 @@
+type Medicamento {
+    id: ID!
+    descripcion: String!
+    dosis: String!
+    nombre: String!
+}
+
+input MedicamentoPersistencia {
+    nombre: String!
+    descripcion: String!
+    dosis: String!
+}

@@ -7,20 +7,6 @@ type Cliente {
     telefono: String!
 }
 
-type Query {
-    getAllClientes: [Cliente]
-    getAllMascotas: [Mascota]
-}
-
-type Mutation {
-    createCliente(input: ClientePersistencia!): Mensaje
-    deleteCliente(id: ID!): Mensaje
-    updateCliente(id: ID!, input: ClientePersistencia!): Mensaje
-    createMascota(input: MascotaPersistencia!): Mensaje
-    deleteMascota(id: ID!): Mensaje
-    updateMascota(input: MascotaUpdate!): Mensaje
-}
-
 input ClientePersistencia {
     cedula: String!
     nombres: String!
@@ -28,32 +14,3 @@ input ClientePersistencia {
     direccion: String!
     telefono: String!
 }
-
-type Medicamento {
-    id: ID!
-    descripcion: String!
-    dosis: String!
-    nombre: String!
-}
-
-input MedicamentoPersistencia {
-    nombre: String!
-    descripcion: String!
-    dosis: String!
-}
-
-type Query {
-    getAllClientes: [Cliente]
-    getAllMedicamentos: [Medicamento]
-}
-
-type Mutation {
-    createCliente(input: ClientePersistencia!): Mensaje
-    deleteCliente(id: ID!): Mensaje
-    updateCliente(id: ID!, input: ClientePersistencia!): Mensaje
-    createMedicamento(input: MedicamentoPersistencia!): Mensaje
-    deleteMedicamento(id: ID!): Mensaje
-    updateMedicamento(id: ID!, input: MedicamentoPersistencia!): Mensaje
-}
-
-
