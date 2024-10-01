@@ -3,6 +3,7 @@ package com.example.pets.service;
 import java.util.List;
 
 import com.example.pets.dto.*;
+import com.example.pets.entity.MascotasEntity;
 import com.example.pets.exception.DataException;
 
 public interface IMascotaService {
@@ -17,4 +18,6 @@ public interface IMascotaService {
     List<MascotasConsltaDTO> listarMascotas() throws DataException;
 
     List<ReporteMascotasDTO> consultarMascotas(Integer idCliente);
+
+    List<MascotasEntity> getAllentities();
 }

@@ -69,6 +69,11 @@ public class MascotaService implements IMascotaService {
                 .toList();
     }
 
+    @Override
+    public List<MascotasEntity> getAllentities() {
+        return mascotaRepository.findAll();
+    }
+
     private ReporteMascotasDTO generarReporteMascota(MascotasEntity entity) {
         ReporteMascotasDTO reporte = MascotaMapper.INSTANCE.entityToReporteDTO(entity);
         reporte.setTratamientos(tratamientoService.reporteTratamientos(entity.getId()));

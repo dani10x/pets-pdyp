@@ -1,0 +1,26 @@
+type Mascota {
+    id: ID!
+    nombre: String!
+    raza: String!
+    peso: Float!
+    fechaNacimiento: String!
+    ClienteEntity: Cliente
+    idCliente: Int!
+}
+
+input MascotaPersistencia {
+    nombre: String!
+    raza: String!
+    peso: Float!
+    fechaNacimiento: String!
+    idCliente: Int!
+}
+
+input MascotaUpdate {
+    id: ID!
+    nombre: String
+    raza: String
+    peso: Float
+    fechaNacimiento: String
+    idCliente: Int
+}

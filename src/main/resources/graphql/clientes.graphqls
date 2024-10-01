@@ -9,12 +9,16 @@ type Cliente {
 
 type Query {
     getAllClientes: [Cliente]
+    getAllMascotas: [Mascota]
 }
 
 type Mutation {
     createCliente(input: ClientePersistencia!): Mensaje
     deleteCliente(id: ID!): Mensaje
     updateCliente(id: ID!, input: ClientePersistencia!): Mensaje
+    createMascota(input: MascotaPersistencia!): Mensaje
+    deleteMascota(id: ID!): Mensaje
+    updateMascota(input: MascotaUpdate!): Mensaje
 }
 
 input ClientePersistencia {

@@ -3,6 +3,10 @@ package com.example.pets.contoller;
 import java.util.List;
 
 import com.example.pets.dto.*;
+import com.example.pets.entity.MascotasEntity;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -52,5 +56,26 @@ public class MascotasController {
         return ResponseEntity.ok(mascotaService.listarMascotas());
     }
 
-    
+    @QueryMapping
+    public List<MascotasEntity> getAllMascotas() {
+        return mascotaService.getAllentities();
+    }
+
+    @MutationMapping
+    public Mensaje createMascota(@Argument MascotaPersistencia input) {
+        mascotaService.CrearMascotas(input);
+        return Mensaje.builder().error(false).respuesta("Mascota creada").build();
+    }
+
+    @MutationMapping
+    public Mensaje deleteMascota(@Argument Integer id) {
+        mascotaService.EliminarMascota(id);
+        return Mensaje.builder().error(false).respuesta("Mascota eliminada").build();
+    }
+
+    @MutationMapping
+    public Mensaje updateMascota(@Argument MascotaUpdate input) {
+        mascotaService.ActualizarMascota(input);
+        return Mensaje.builder().error(false).respuesta("Mascota actualizada").build();
+    }
 }

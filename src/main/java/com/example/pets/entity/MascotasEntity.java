@@ -40,4 +40,10 @@ public class MascotasEntity {
 
     @Column(name = "idcliente")
     private Integer idCliente;
+
+    @PrePersist
+    @PreUpdate
+    private void setFecha() {
+        this.setFechaNacimiento(this.fechaNacimiento.plusSeconds(2));
+    }
 }
