@@ -1,0 +1,14 @@
+type Tratamiento {
+    id: ID!
+    fechaInicio: String!
+    medicamentosEntity: Medicamento!
+    medicamentosId: Int!
+    mascotasEntity: Mascota!
+    mascotasId: Int!
+}
+
+input TratamientoPersistencia {
+    fechaInicio: String!
+    medicamentosId: Int!
+    mascotasId: Int!
+}
