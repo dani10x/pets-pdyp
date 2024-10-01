@@ -2,6 +2,7 @@ type Query {
     getAllClientes: [Cliente]
     getAllMascotas: [Mascota]
     getAllMedicamentos: [Medicamento]
+    getAllTratamientos: [Tratamiento]
 }
 
 type Mutation {
@@ -14,4 +15,5 @@ type Mutation {
     createMedicamento(input: MedicamentoPersistencia!): Mensaje
     deleteMedicamento(id: ID!): Mensaje
     updateMedicamento(id: ID!, input: MedicamentoPersistencia!): Mensaje
+    createTratamiento(input: TratamientoPersistencia!): Mensaje
 }

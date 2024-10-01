@@ -2,6 +2,10 @@ package com.example.pets.contoller;
 import java.util.List;
 
 import com.example.pets.dto.*;
+import com.example.pets.entity.TratamientosEntity;
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,5 +51,16 @@ public class TratamientosController {
     @GetMapping("/lstar-tratamientos/{id}")
     public ResponseEntity<List<TratamientoMascotaConsulta>> consultarTratamientosMascota(@PathVariable Integer id) {
         return ResponseEntity.ok(tratamientoService.ListarTratamientos(id));
+    }
+
+    @QueryMapping
+    public List<TratamientosEntity> getAllTratamientos() {
+        return tratamientoService.getAllEntities();
+    }
+
+    @MutationMapping
+    public Mensaje createTratamiento(@Argument TratamientoPersistencia input) {
+        tratamientoService.CrearTratamiento(input);
+        return Mensaje.builder().error(false).respuesta("Tratamiento creado").build();
     }
 }

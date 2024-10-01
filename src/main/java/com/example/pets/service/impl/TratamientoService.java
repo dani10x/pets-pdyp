@@ -69,4 +69,9 @@ public class TratamientoService implements ITratamientoService{
                 .map(TratamientoMapper.INSTANCE::ListEntityToListReporteDTO).orElse(List.of());
     }
 
+    @Override
+    public List<TratamientosEntity> getAllEntities() {
+        return tratamientoRepository.findAll();
+    }
+
 }
