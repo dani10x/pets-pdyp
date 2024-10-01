@@ -1,6 +1,9 @@
 package com.example.pets.contoller;
 import java.util.List;
 
+import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.MutationMapping;
+import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,5 +52,29 @@ public class MedicamentosController {
         return ResponseEntity.ok(Mensaje.builder().error(false).respuesta("Medicamento actualizado").build());
     }
 
+    @QueryMapping
+    public List<MedicamentoConsulta> getAllMedicamentos() {
+        return medicamentosService.listarMedicamentos();
+    }
+
+    @MutationMapping
+    public Mensaje createMedicamento(@Argument MedicamentoPersistencia input) {
+        medicamentosService.CrearMedicamento(input);
+        return Mensaje.builder().error(false).respuesta("Medicamento creado").build();
+    }
+
+    @MutationMapping
+    public Mensaje updateMedicamento(@Argument Integer id, @Argument MedicamentoPersistencia input) {
+        MedicamentoUpdate medicamento = new MedicamentoUpdate(id, input.getDescripcion(), input.getDosis(),
+                input.getNombre());
+                medicamentosService.ActualizarMedicamento(medicamento);
+        return Mensaje.builder().error(false).respuesta("Medicamento actualizado").build();
+    }
+
+    @MutationMapping
+    public Mensaje deleteMedicamento(@Argument Integer id) {
+        medicamentosService.EliminarMedicamento(id);
+        return Mensaje.builder().error(false).respuesta("Medicamento eliminado").build();
+    }
 
 }
